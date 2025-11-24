@@ -102,42 +102,53 @@
     <!-- جافاسكربت الموقع -->
     <script src="assets/script.js"></script>
 
-    <!-- زر الترجمة المتطور (اسم كل لغة بلغتها الأصلية + أعلام) -->
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'ar',
-        includedLanguages: '',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false,
-        multilanguagePage: true
-      }, 'google_translate_element');
+    <!-- زر ترجمة فوري أسود أنيق (يشتغل فورًا 100% بدون تأخير) -->
+<div id="translation-widget" style="position:fixed; top:15px; left:15px; z-index:99999;">
+  <select onchange="doGTranslate(this);" style="background:#1a1a1a; color:white; border:none; padding:12px 20px; border-radius:14px; font-weight:bold; font-size:16px; box-shadow:0 6px 20px rgba(0,0,0,0.5);">
+    <option value="">اختر اللغة</option>
+    <option value="ar|en">English</option>
+    <option value="ar|es">Español</option>
+    <option value="ar|fr">Français</option>
+    <option value="ar|de">Deutsch</option>
+    <option value="ar|zh-CN">中文 (简体)</option>
+    <option value="ar|ja">日本語</option>
+    <option value="ar|ko">한국어</option>
+    <option value="ar|ru">Русский</option>
+    <option value="ar|pt">Português</option>
+    <option value="ar|it">Italiano</option>
+    <option value="ar|tr">Türkçe</option>
+    <option value="ar|hi">हिन्दी</option>
+    <option value="ar|pl">Polski</option>
+    <option value="ar|nl">Nederlands</option>
+    <option value="ar|sv">Svenska</option>
+    <!-- أضف أي لغة تانية تحبها بنفس الطريقة -->
+  </select>
+</div>
 
-      setTimeout(() => {
-        const select = document.querySelector('.goog-te-gadget-simple');
-        if (select) {
-          select.classList.add('translate-btn');
-          select.innerHTML = 'العالم ' + select.innerHTML;
-        }
+<script type="text/javascript">
+function doGTranslate(lang_pair) {
+  if(lang_pair.value) lang_pair = lang_pair.value;
+  if(lang_pair == '') return;
+  var lang = lang_pair.split('|')[1];
+  var teCombo = document.querySelector('.goog-te-combo');
+  if (teCombo) {
+    teCombo.value = lang;
+    teCombo.dispatchEvent(new Event('change'));
+  } else {
+    // إذا لم يتم تحميل الـ combo بعد، نحمّله فورًا
+    var script = document.createElement('script');
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2';
+    document.body.appendChild(script);
+  }
+}
 
-        // إظهار اسم اللغة بلغتها الأصلية + علم الدولة
-        const style = document.createElement('style');
-        style.innerHTML = `
-          .goog-te-menu-value span:first-child { display: none !important; }
-          .goog-te-menu-value::before { font-size: 20px; margin: 0 8px 0 0; }
-          .goog-te-menu-frame { background: #1a1a1a !important; border-radius: 16px !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important; }
-          .goog-te-menu2-item div, .goog-te-menu2-item:link div { color: white !important; font-weight: 500; }
-          .goog-te-menu2-item:hover div { background: #333 !important; }
-        `;
-        document.head.appendChild(style);
-      }, 2500);
-    }
-    </script>
-    <script type="text/javascript" 
-            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+function googleTranslateElementInit2() {
+  new google.translate.TranslateElement({pageLanguage:'ar'}, 'translation-widget');
+  setTimeout(() => {
+    document.querySelector('.goog-te-combo').value = 'en';
+    document.querySelector('.goog-te-combo').dispatchEvent(new Event('change'));
+  }, 500);
+}
+</script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2"></script>
