@@ -2,26 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>ذكريات الأبدية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذكريات الأبدية - تبني حيوانك الافتراضي</title>
     <link href="assets/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>تبني حيوانك الافتراضي</h1>
-        <select id="petType">
-            <option>أسد بري</option>
-            <option>حوت بحري</option>
-            <option>نسر طائر</option>
-            <option>تيرانوصور ديناصور</option>
-            <option>تنين نار</option>
-        </select>
-        <button onclick="adoptPet()">تبني</button>
-        <canvas id="petCanvas" width="400" height="300"></canvas>
-        <button onclick="reviveMemory()">إحياء ذكرى</button>
-        <input type="text" id="memoryDesc" placeholder="صف حيوانك المتوفى">
-        <!-- AdSense: أضف كود الإعلان هنا بعد الموافقة -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"></script>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">ذكريات الأبدية: امتلك وأحيِ حيواناتك</h1>
+        <p class="text-center">اختر حيواناً برياً، بحرياً، طائراً، ديناصوراً، أو تنيناً، وابدأ في تربيته. أو أحيِ ذكرى حيوان متوفى.</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h3>تبني حيوان جديد</h3>
+                <select id="petType" class="form-select mb-3">
+                    <option value="أسد بري">أسد بري</option>
+                    <option value="حوت بحري">حوت بحري</option>
+                    <option value="نسر طائر">نسر طائر</option>
+                    <option value="تيرانوصور ديناصور">تيرانوصور ديناصور</option>
+                    <option value="تنين نار">تنين نار</option>
+                    <!-- أضف المزيد إذا أردت -->
+                </select>
+                <button onclick="adoptPet()" class="btn btn-primary w-100">تبني الآن</button>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <h3>إحياء ذكرى حيوان متوفى</h3>
+                <input type="text" id="memoryDesc" class="form-control mb-3" placeholder="صف حيوانك المتوفى (مثل: كلب أسود يحب اللعب بالكرة)">
+                <button onclick="reviveMemory()" class="btn btn-success w-100">إحياء الذكرى</button>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <canvas id="petCanvas" width="600" height="400" class="border border-dark"></canvas>
+                <p id="petStatus" class="text-center mt-2">حالة الحيوان: جاهز للتفاعل</p>
+            </div>
+        </div>
+        
+        <!-- مكان للإعلانات (AdSense) – أضف الكود لاحقاً -->
+        <div class="text-center mt-5">
+            <!-- adsbygoogle -->
+        </div>
     </div>
     <script src="assets/script.js"></script>
 </body>
